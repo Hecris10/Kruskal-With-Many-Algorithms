@@ -26,7 +26,6 @@ public class Main {
 		for(Edge e : mst) {
 			System.out.println(e.v+" ,"+e.peso+","+e.w);			
 		}
-
 	}
 	
 	
