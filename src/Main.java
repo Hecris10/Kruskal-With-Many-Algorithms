@@ -12,16 +12,17 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		String entrada = args[0];
-		String alg = args[1];
+		/*String entrada = args[0];
+		String alg = args[1]; */
 		
 		List<Edge> edges;
 		//O arquivo deve conter as arestas em csv onde cada linha do cs representa: source,weigth,target
-		edges = readCsvFile(entrada);
+		edges = readCsvFile("C:\\Users\\helam\\OneDrive\\7_vertices.csv");
 		
 		
 
-		Graph graph = new Graph(edges, alg);
+		//Graph graph = new Graph(edges, alg);
+		Graph graph = new Graph(edges);
 		List<Edge> mst= graph.Kruskal();
 		for(Edge e : mst) {
 			System.out.println(e.v+" ,"+e.peso+","+e.w);			

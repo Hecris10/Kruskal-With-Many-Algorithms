@@ -5,9 +5,10 @@ public class Graph {
 	List<Vertex> V;
 	List<Edge> E = new ArrayList<Edge>();
 	String alg;
-	public Graph(List<Edge> edges, String alg) {
+	//public Graph(List<Edge> edges, String alg) {
+	public Graph(List<Edge> edges) {
 		this.E = edges;			
-		this.alg = alg;
+		
 	}
 	
 	// use E.set(5,(edge)) para adicionar no quinto espaço do vetor
@@ -18,7 +19,7 @@ public class Graph {
 			Collections.shuffle(arestas);			
 		} */
 		Sort ordenar = new Sort(arestas);
-		if(this.alg=="HeapSort"){
+		/*if(this.alg=="HeapSort"){
 			ordenar.HeapSort();
 			return arestas;
 		}else if(this.alg=="InsertSort"){
@@ -33,8 +34,10 @@ public class Graph {
 		}else if(this.alg=="ShellSort"){
 			arestas = ordenar.ShellSort();
 			return arestas;
-		}
-	
+		} */
+
+		ordenar.MergeSort(arestas, 0, arestas.size()-1);
+		
 		return arestas;
 	}
 	

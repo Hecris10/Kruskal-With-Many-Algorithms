@@ -29,33 +29,34 @@ public class Sort {
 
     public void QuickSort(final List<Edge> vetor, final int inicio, final int fim) {
         if (inicio < fim) {
-            final int posicaoPivo = this.Quick_Particionar(vetor, inicio, fim);
+            int posicaoPivo = this.Quick_Particionar(vetor, inicio, fim);
             this.QuickSort(vetor, inicio, posicaoPivo - 1);
             this.QuickSort(vetor, posicaoPivo + 1, fim);
         }
     }
 
-    private int Quick_Particionar(final List<Edge> vetor, final int inicio, final int fim) {
+    private int Quick_Particionar(List<Edge> vetor, int inicio, int fim) {
 
-        final Edge pivo = vetor.get(inicio);
-        int i = inicio + 1, f = fim - 1;
-        while (i <= f) {
-            if (vetor.get(i).peso <= pivo.peso)
+        Edge pivo = vetor.get(fim);
+        int i = (inicio-1); // pegar o indice do menor elemento
+        
+        for(int j=inicio; j<fim; j++){
+            if(vetor.get(j).peso<pivo.peso){
                 i++;
-            else if (pivo.peso < vetor.get(f).peso)
-                f--;
-            else {
-                final Edge troca = vetor.get(i);
-                vetor.set(i, vetor.get(f));
-                vetor.set(f, troca);
-                i++;
-                f--;
+
+                Edge temp = vetor.get(i);
+                vetor.set(i, vetor.get(j));
+                vetor.set(j, temp);
+
             }
         }
-        vetor.set(inicio, vetor.get(f));
-        vetor.set(f, pivo);
 
-        return f;
+        Edge temp = vetor.get(i+1);
+        vetor.set(i+1, vetor.get(fim));
+        vetor.set(fim, temp);
+
+
+        return i+1;
     }
 
     private void Merge(final List<Edge> Colecao, final int l, final int m, final int r) {
