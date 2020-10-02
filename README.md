@@ -4,7 +4,7 @@ THIS FILES CONTAIN THE KRUSKAL BUT YOU CAN CHOOSE THE SORT ALGOTITHM REQUIRES BY
 
 ## Folder Structure
 
-The workspace contains two folders by default, where:
+The workspace contains One folder by default, where:
 
 - `src`: the folder to maintain sources
 
