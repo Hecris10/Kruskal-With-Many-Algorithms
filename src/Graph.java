@@ -5,6 +5,7 @@ public class Graph {
 	List<Vertex> V;
 	List<Edge> E = new ArrayList<Edge>();
 	String alg;
+	Long tempoExe = 0L;
 	//public Graph(List<Edge> edges, String alg) {
 	public Graph(List<Edge> edges) {
 		this.E = edges;			
@@ -35,9 +36,15 @@ public class Graph {
 			arestas = ordenar.ShellSort();
 			return arestas;
 		} */
-
-		ordenar.MergeSort(arestas, 0, arestas.size()-1);
+		final long tempoInicial = System.currentTimeMillis()/1000;
+		System.out.println("Vai comecar a ordenar agora");
+		ordenar.QuickSort_final(arestas, 0, arestas.size()-1, 90);
+		System.out.println("Terminou de ordenar");
+		final long tempoFinal = System.currentTimeMillis()/1000;
 		
+		this.tempoExe = tempoFinal - tempoInicial;
+		
+		System.out.println("Tempo de execucao: " + this.tempoExe + " Segundos");
 		return arestas;
 	}
 	

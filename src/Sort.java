@@ -187,4 +187,93 @@ public class Sort {
         }
         return colecao;
     }
+
+    public void QuickSort_parcial(final List<Edge> vetor, final int inicio, final int fim, int L) {
+        if (inicio < fim) {
+            int posicaoPivo = this.Quick_Particiona_Parcial(vetor, inicio, fim, L);
+            this.QuickSort_parcial(vetor, inicio, posicaoPivo - 1, L);
+            this.QuickSort_parcial(vetor, posicaoPivo + 1, fim, L);
+        }
+    }
+
+    private int Quick_Particiona_Parcial(List<Edge> vetor, int inicio, int fim, int L) {
+
+        if(vetor.size()<=L){
+            int valor = (inicio-1);
+
+            for (int i = 1; i < fim; ++i) {
+                final Edge key = colecao.get(i);
+                int j = i - 1;
+    
+                /*
+                 * Move elements of arr[0..i-1], that are greater than key, to one position
+                 * ahead of their current position
+                 */
+                while (j >= 0 && colecao.get(j).peso > key.peso) {
+                    colecao.set(j + 1, colecao.get(j));
+                    j = j - 1;
+                }
+                colecao.set(j + 1, key);
+                valor++;
+            }
+            return valor+1;
+        }
+        Edge pivo = vetor.get(fim);
+        int i = (inicio-1); // pegar o indice do menor elemento
+        
+        for(int j=inicio; j<fim; j++){
+            if(vetor.get(j).peso<pivo.peso){
+                i++;
+
+                Edge temp = vetor.get(i);
+                vetor.set(i, vetor.get(j));
+                vetor.set(j, temp);
+
+            }
+        }
+
+        Edge temp = vetor.get(i+1);
+        vetor.set(i+1, vetor.get(fim));
+        vetor.set(fim, temp);
+
+
+        return i+1;
+    }
+
+    public void QuickSort_final(final List<Edge> vetor, final int inicio, final int fim, int L) {
+        if (inicio < fim) {
+            int posicaoPivo = this.Quick_Particiona_final(vetor, inicio, fim, L);
+            this.QuickSort_final(vetor, inicio, posicaoPivo - 1, L);
+            this.QuickSort_final(vetor, posicaoPivo + 1, fim, L);
+        }
+    }
+
+    private int Quick_Particiona_final(List<Edge> vetor, int inicio, int fim, int L) {
+
+        if(vetor.size()<=L){
+            
+            return inicio-1; 
+        }
+        int valor = (inicio-1);
+
+            for (int i = 1; i < fim; ++i) {
+                final Edge key = colecao.get(i);
+                int j = i - 1;
+    
+                /*
+                 * Move elements of arr[0..i-1], that are greater than key, to one position
+                 * ahead of their current position
+                 */
+                while (j >= 0 && colecao.get(j).peso > key.peso) {
+                    colecao.set(j + 1, colecao.get(j));
+                    j = j - 1;
+                }
+                colecao.set(j + 1, key);
+                valor++;
+            }
+            return valor+1;
+        
+    }
+
+
 }

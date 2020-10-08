@@ -17,7 +17,7 @@ public class Main {
 		
 		List<Edge> edges;
 		//O arquivo deve conter as arestas em csv onde cada linha do cs representa: source,weigth,target
-		edges = readCsvFile("C:\\Users\\helam\\OneDrive\\7_vertices.csv");
+		edges = readCsvFile("C:\\Users\\helam\\OneDrive\\Área de Trabalho\\ED_2_TRABALHO+01\\Java\\Trabalho_01_Final\\Trabalho_01\\7_vertices.csv");
 		
 		
 
@@ -27,6 +27,8 @@ public class Main {
 		for(Edge e : mst) {
 			System.out.println(e.v+" ,"+e.peso+","+e.w);			
 		}
+
+		System.out.println("Tempo de execucao: " + (float)graph.tempoExe + " Segundos");
 	}
 	
 	
