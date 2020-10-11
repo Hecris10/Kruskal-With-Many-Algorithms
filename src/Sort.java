@@ -250,11 +250,8 @@ public class Sort {
 
     private int Quick_Particiona_final(List<Edge> vetor, int inicio, int fim, int L) {
 
-        if(vetor.size()<=L){
-            
-            return inicio-1; 
-        }
-        int valor = (inicio-1);
+        if(vetor.size()>L){
+            int valor = (inicio-1);
 
             for (int i = 1; i < fim; ++i) {
                 final Edge key = colecao.get(i);
@@ -272,6 +269,10 @@ public class Sort {
                 valor++;
             }
             return valor+1;
+            
+        }
+        return inicio-1;
+       
         
     }
 

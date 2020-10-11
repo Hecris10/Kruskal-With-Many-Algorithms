@@ -38,7 +38,7 @@ public class Graph {
 		} */
 		final long tempoInicial = System.currentTimeMillis()/1000;
 		System.out.println("Vai comecar a ordenar agora");
-		ordenar.QuickSort_final(arestas, 0, arestas.size()-1, 90);
+		ordenar.QuickSort_parcial(arestas, 0, arestas.size()-1, 2);
 		System.out.println("Terminou de ordenar");
 		final long tempoFinal = System.currentTimeMillis()/1000;
 		
