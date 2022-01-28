@@ -12,23 +12,25 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/*String entrada = args[0];
-		String alg = args[1]; */
+		String entrada = args[0];
+		String alg = args[1];
+		int L = Integer.parseInt(args[2]);
 		
 		List<Edge> edges;
 		//O arquivo deve conter as arestas em csv onde cada linha do cs representa: source,weigth,target
-		edges = readCsvFile("C:\\Users\\helam\\OneDrive\\Área de Trabalho\\ED_2_TRABALHO+01\\Java\\Trabalho_01_Final\\Trabalho_01\\7_vertices.csv");
+		edges = readCsvFile(entrada);
 		
 		
 
-		//Graph graph = new Graph(edges, alg);
-		Graph graph = new Graph(edges);
+		//Graph graph = new Graph(edges, alg)
+		Graph graph = new Graph(edges,alg, L);
 		List<Edge> mst= graph.Kruskal();
+	
 		for(Edge e : mst) {
 			System.out.println(e.v+" ,"+e.peso+","+e.w);			
 		}
 
-		System.out.println("Tempo de execucao: " + (float)graph.tempoExe + " Segundos");
+		
 	}
 	
 	

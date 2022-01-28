@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Sort {
     List<Edge> colecao;
+    int compara = 0;
     public Sort(final List<Edge> colecao) {
         this.colecao = colecao;
     }
@@ -15,16 +16,38 @@ public class Sort {
             int j = i - 1;
 
             /*
-             * Move elements of arr[0..i-1], that are greater than key, to one position
-             * ahead of their current position
-             */
+             * mover os elementos sempre a diante */
             while (j >= 0 && colecao.get(j).peso > key.peso) {
                 colecao.set(j + 1, colecao.get(j));
                 j = j - 1;
+                this.compara++;
             }
             colecao.set(j + 1, key);
         }
+        System.out.println("Foram feitas " + this.compara + " comparacoes");
+       
         return colecao;
+    }
+
+    
+    public List<Edge> InsertionSort(List<Edge> lista, int inicio, int fim) {
+        
+        int n = fim;
+        
+        for (int i = inicio+1; i < n; ++i) {
+            final Edge key = lista.get(i);
+            int j = i - 1;
+
+            /*
+             * mover os elementos sempre a diante */
+            while (j >= 0 && lista.get(j).peso > key.peso) {
+                lista.set(j + 1, lista.get(j));
+                j = j - 1;
+                this.compara++;
+            }
+            lista.set(j + 1, key);
+        }
+         return colecao;
     }
 
     public void QuickSort(final List<Edge> vetor, final int inicio, final int fim) {
@@ -32,6 +55,7 @@ public class Sort {
             int posicaoPivo = this.Quick_Particionar(vetor, inicio, fim);
             this.QuickSort(vetor, inicio, posicaoPivo - 1);
             this.QuickSort(vetor, posicaoPivo + 1, fim);
+
         }
     }
 
@@ -43,6 +67,7 @@ public class Sort {
         for(int j=inicio; j<fim; j++){
             if(vetor.get(j).peso<pivo.peso){
                 i++;
+                this.compara = this.compara+1;
 
                 Edge temp = vetor.get(i);
                 vetor.set(i, vetor.get(j));
@@ -88,9 +113,11 @@ public class Sort {
             if(L[i].peso <= R[j].peso){
                 colecao.set(k, L[i]);
                 i++;    
+                this.compara++;
             }else{
                 colecao.set(k, R[j]);
                 j++;
+                this.compara++;
             }
             k++;
         }
@@ -151,10 +178,12 @@ public class Sort {
         //checar se o filho a esquerda eh menor
         if (l<n && (colecao.get(l).peso > colecao.get(maior).peso)){
             maior = l;
+            this.compara++;
         }
 
         if (r<n && (colecao.get(r).peso > colecao.get(maior).peso)){
             maior = r;
+            this.compara++;
         }
 
         //se o maior nao for a raiz
@@ -181,6 +210,7 @@ public class Sort {
                 int j;
                 for (j=i;(j>=gap) && (this.colecao.get(j-gap).peso>temp.peso);j -=gap)
                     this.colecao.set(j, this.colecao.get(j-gap));
+                    this.compara++;
                 
                 this.colecao.set(j, temp);
             }
@@ -188,93 +218,34 @@ public class Sort {
         return colecao;
     }
 
-    public void QuickSort_parcial(final List<Edge> vetor, final int inicio, final int fim, int L) {
-        if (inicio < fim) {
-            int posicaoPivo = this.Quick_Particiona_Parcial(vetor, inicio, fim, L);
-            this.QuickSort_parcial(vetor, inicio, posicaoPivo - 1, L);
-            this.QuickSort_parcial(vetor, posicaoPivo + 1, fim, L);
+   public void QuickSort_parcial(List<Edge> vetor, int inicio, int fim, int L){
+        if(inicio<fim){
+            if(fim-inicio <=L){
+                this.InsertionSort(vetor, 0, vetor.size());
+            }
+             else {
+                int posicaoPivo = this.Quick_Particionar(vetor, inicio, fim);
+                this.QuickSort_parcial(vetor, inicio, posicaoPivo - 1, L);
+                this.QuickSort_parcial(vetor, posicaoPivo + 1, fim, L);
         }
     }
+}
 
-    private int Quick_Particiona_Parcial(List<Edge> vetor, int inicio, int fim, int L) {
 
-        if(vetor.size()<=L){
-            int valor = (inicio-1);
-
-            for (int i = 1; i < fim; ++i) {
-                final Edge key = colecao.get(i);
-                int j = i - 1;
-    
-                /*
-                 * Move elements of arr[0..i-1], that are greater than key, to one position
-                 * ahead of their current position
-                 */
-                while (j >= 0 && colecao.get(j).peso > key.peso) {
-                    colecao.set(j + 1, colecao.get(j));
-                    j = j - 1;
-                }
-                colecao.set(j + 1, key);
-                valor++;
-            }
-            return valor+1;
-        }
-        Edge pivo = vetor.get(fim);
-        int i = (inicio-1); // pegar o indice do menor elemento
+public void QuickSort_final(final List<Edge> vetor, final int inicio, final int fim, int L) {
+    if (inicio < fim) {
+        int posicaoPivo = this.Quick_Particionar(vetor, inicio, fim);
         
-        for(int j=inicio; j<fim; j++){
-            if(vetor.get(j).peso<pivo.peso){
-                i++;
-
-                Edge temp = vetor.get(i);
-                vetor.set(i, vetor.get(j));
-                vetor.set(j, temp);
-
-            }
-        }
-
-        Edge temp = vetor.get(i+1);
-        vetor.set(i+1, vetor.get(fim));
-        vetor.set(fim, temp);
-
-
-        return i+1;
-    }
-
-    public void QuickSort_final(final List<Edge> vetor, final int inicio, final int fim, int L) {
-        if (inicio < fim) {
-            int posicaoPivo = this.Quick_Particiona_final(vetor, inicio, fim, L);
+        if((posicaoPivo-1)-inicio>L){
             this.QuickSort_final(vetor, inicio, posicaoPivo - 1, L);
+        }
+        if(fim - (posicaoPivo+1)>L){
             this.QuickSort_final(vetor, posicaoPivo + 1, fim, L);
         }
-    }
 
-    private int Quick_Particiona_final(List<Edge> vetor, int inicio, int fim, int L) {
-
-        if(vetor.size()>L){
-            int valor = (inicio-1);
-
-            for (int i = 1; i < fim; ++i) {
-                final Edge key = colecao.get(i);
-                int j = i - 1;
-    
-                /*
-                 * Move elements of arr[0..i-1], that are greater than key, to one position
-                 * ahead of their current position
-                 */
-                while (j >= 0 && colecao.get(j).peso > key.peso) {
-                    colecao.set(j + 1, colecao.get(j));
-                    j = j - 1;
-                }
-                colecao.set(j + 1, key);
-                valor++;
-            }
-            return valor+1;
-            
-        }
-        return inicio-1;
-       
+        this.InsertionSort(vetor, inicio, posicaoPivo-1);
+        this.InsertionSort(vetor, posicaoPivo+1, fim);
         
     }
-
-
+}
 }

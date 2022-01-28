@@ -2,13 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
-	List<Vertex> V;
+	
+	
 	List<Edge> E = new ArrayList<Edge>();
 	String alg;
+	int L;
 	Long tempoExe = 0L;
-	//public Graph(List<Edge> edges, String alg) {
-	public Graph(List<Edge> edges) {
-		this.E = edges;			
+
+	public Graph(List<Edge> edges, String alg, int L) {
+
+		this.E = edges;		
+		this.L = L;	
 		
 	}
 	
@@ -20,7 +24,7 @@ public class Graph {
 			Collections.shuffle(arestas);			
 		} */
 		Sort ordenar = new Sort(arestas);
-		/*if(this.alg=="HeapSort"){
+		if(this.alg=="HeapSort"){
 			ordenar.HeapSort();
 			return arestas;
 		}else if(this.alg=="InsertSort"){
@@ -35,16 +39,16 @@ public class Graph {
 		}else if(this.alg=="ShellSort"){
 			arestas = ordenar.ShellSort();
 			return arestas;
-		} */
-		final long tempoInicial = System.currentTimeMillis()/1000;
-		System.out.println("Vai comecar a ordenar agora");
-		ordenar.QuickSort_parcial(arestas, 0, arestas.size()-1, 2);
-		System.out.println("Terminou de ordenar");
-		final long tempoFinal = System.currentTimeMillis()/1000;
+		}
+		else if(this.alg=="QuickSort_Parcial"){
+			ordenar.QuickSort_parcial(arestas, 0, arestas.size()-1, this.L);
+			return arestas;
+		}
+		else if(this.alg=="QuickSort_Final"){
+			ordenar.QuickSort_final(arestas, 0, arestas.size()-1, this.L);
+			return arestas;
+		}
 		
-		this.tempoExe = tempoFinal - tempoInicial;
-		
-		System.out.println("Tempo de execucao: " + this.tempoExe + " Segundos");
 		return arestas;
 	}
 	
@@ -140,7 +144,4 @@ public class Graph {
 		
 		return floresta;
 	}
-	
-	
-
 }
